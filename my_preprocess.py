@@ -3,17 +3,20 @@ from my_packages import *
 
 def add_date_features(df, date_col):
     hour = []
-    day_of_week = []
-    month = []
+    #day_of_week = []
+    #month = []
+    #day = []
 
     for d in df[date_col]:
         d = pd.to_datetime(d)
         hour.extend([d.hour])
-        day_of_week.extend([d.dayofweek])
-        month.extend([d.month])
+        #day_of_week.extend([d.dayofweek])
+        #month.extend([d.month])
+        #day.extend([d.day])
 
     df.loc[:, date_col + '_hour'] = hour
-    df.loc[:, date_col + '_dow'] = day_of_week
+    #df.loc[:, date_col + '_dow'] = day_of_week
+    #df.loc[:, date_col + '_day'] = day
     #df.loc[:, date_col + '_month'] = month
 
     return df
@@ -25,6 +28,12 @@ def add_date_features(df, date_col):
 #    df = df.merge(groupby, on='ip', how = 'left')
 
 #    return df
+
+
+def add_combined_feat(df):
+    df['os+device'] = [int(str(os)+str(dev)) for os, dev in zip(df['os'], df['device'])]
+    df['os+hour'] = [int(str(os) + str(hour)) for os, hour in zip(df['os'],df['click_time_hour'])]
+    return df
 
 
 def down_sample_train(train, target = 'is_attributed', n=1):

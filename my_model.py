@@ -59,8 +59,6 @@ class MyXgbModel(MyAbstractModel):
             df = down_sample_train(df, n=param['sample_ratio'])
   
         df = add_date_features(df, 'click_time')
-        #df = add_groupby_features(df)
-        df = df.drop(['click_time', 'device'], axis=1)
         
         return df
 
