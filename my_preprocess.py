@@ -14,17 +14,17 @@ def add_date_features(df, date_col):
 
     df.loc[:, date_col + '_hour'] = hour
     df.loc[:, date_col + '_dow'] = day_of_week
-    df.loc[:, date_col + '_month'] = month
+    #df.loc[:, date_col + '_month'] = month
 
     return df
 
 
-def add_groupby_features(df):
-    groupby = df.groupby(['ip'])['is_attributed'].sum().reset_index()
-    groupby = groupby.rename(columns = {'is_attributed':'sum_attributed'})
-    df = df.merge(groupby, on='ip', how = 'left')
+#def add_groupby_features(df):
+#    groupby = df.groupby(['ip'])['is_attributed'].sum().reset_index()
+#    groupby = groupby.rename(columns = {'is_attributed':'sum_attributed'})
+#    df = df.merge(groupby, on='ip', how = 'left')
 
-    return df
+#    return df
 
 
 def down_sample_train(train, target = 'is_attributed', n=1):
